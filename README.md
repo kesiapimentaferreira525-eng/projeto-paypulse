@@ -6,6 +6,13 @@ O front-end pode carregar a tabela com `GET http://localhost:8082/api/v1/transac
 Cada item retorna `id`, `accountId`, `amount`, `status` e `createdAt`; a API aceita
 novas transações em `POST` no mesmo endpoint.
 
+## Swagger / OpenAPI
+
+Com a aplicação em execução, acesse a interface Swagger em
+`http://localhost:8082/swagger-ui/index.html`. O contrato OpenAPI em JSON fica em
+`http://localhost:8082/v3/api-docs`. A documentação inclui os endpoints `GET` e
+`POST /api/v1/transactions`.
+
 Para preencher a tabela com dados fictícios, inicie a API com o perfil `demo`:
 
 ```powershell
