@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b2c">
+  <title>PayPulse | Visão geral</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/" aria-label="PayPulse, início">
+        <span class="brand-mark">P</span>
+        <span class="brand-name">paypulse<span>.</span><small>PAYMENTS</small></span>
+      </a>
+
+      <p class="nav-caption">MENU PRINCIPAL</p>
+      <nav class="navigation" aria-label="Menu principal">
+        <a class="nav-link active" href="#overview">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="11" width="7" height="10" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+          Visão geral
+        </a>
+        <a class="nav-link" href="#transactions">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="3"/></svg>
+          Transações
+          <span class="nav-count" id="nav-count">—</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <span class="help-icon">?</span>
+          <div><strong>Precisa de ajuda?</strong><span>Seu painel está atualizado.</span></div>
+        </div>
+        <div class="user-profile">
+          <span class="avatar">PP</span>
+          <span class="user-copy"><strong>PayPulse Admin</strong><small>Conta de demonstração</small></span>
+          <span class="profile-menu" aria-hidden="true">···</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" type="button" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <div class="breadcrumb"><span>Painel</span><span class="crumb-divider">/</span><strong>Visão geral</strong></div>
+        <div class="topbar-actions">
+          <span class="connection"><i></i> Sistema operacional</span>
+          <span class="topbar-divider"></span>
+          <span class="top-date" id="today-label"></span>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <section class="page-heading">
+          <div>
+            <p class="eyebrow">SEU NEGÓCIO EM TEMPO REAL</p>
+            <h1>Visão geral</h1>
+            <p class="page-description">Acompanhe suas transações e resultados em um só lugar.</p>
+          </div>
+          <div class="heading-actions">
+            <button class="button button-secondary" id="refresh-button" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2"/></svg>
+              Atualizar
+            </button>
+            <button class="button button-primary" id="new-transaction-button" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              Nova transação
+            </button>
+          </div>
+        </section>
+
+        <div class="alert" id="load-alert" role="alert" hidden>
+          <span class="alert-icon">!</span>
+          <div><strong>Não foi possível carregar os dados</strong><p id="load-error"></p></div>
+          <button type="button" id="retry-button">Tentar novamente</button>
+        </div>
+
+        <section class="metric-grid" aria-label="Indicadores">
+          <article class="metric-card metric-primary">
+            <div class="metric-top">
+              <span class="metric-label">Volume aprovado</span>
+              <span class="metric-icon icon-green">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M17 7.5c0-1.7-2.2-3-5-3s-5 1.3-5 3 2 2.7 5 3.5 5 1.8 5 3.5-2.2 3-5 3-5-1.3-5-3"/></svg>
+              </span>
+            </div>
+            <strong class="metric-value" id="approved-volume">—</strong>
+            <span class="metric-note"><i class="note-dot green-dot"></i> Soma de pagamentos aprovados</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Transações</span>
+              <span class="metric-icon icon-blue">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/><path d="m17 16 2 2 3-4"/></svg>
+              </span>
+            </div>
+            <strong class="metric-value" id="transaction-count">—</strong>
+            <span class="metric-note" id="transaction-note">Movimentações na sua conta</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Taxa de aprovação</span>
+              <span class="metric-icon icon-purple">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17l5-5 4 3 7-8"/><path d="M15 7h5v5"/></svg>
+              </span>
+            </div>
+            <strong class="metric-value" id="approval-rate">—</strong>
+            <span class="metric-note">Sobre transações já processadas</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Em análise</span>
+              <span class="metric-icon icon-amber">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              </span>
+            </div>
+            <strong class="metric-value" id="pending-count">—</strong>
+            <span class="metric-note">Aguardando processamento</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top">
+              <span class="metric-label">Em processamento</span>
+              <span class="metric-icon icon-blue">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2"/></svg>
+              </span>
+            </div>
+            <strong class="metric-value" id="processing-count">—</strong>
+            <span class="metric-note">Pagamentos em processamento</span>
+          </article>
+        </section>
+
+        <section class="insights-grid" aria-label="Análises das transações">
+          <article class="panel activity-panel">
+            <div class="panel-heading">
+              <div><h2>Atividade recente</h2><p>Volume transacionado nos últimos 7 dias</p></div>
+              <span class="period-chip"><span></span> Últimos 7 dias</span>
+            </div>
+            <div class="chart-summary"><strong id="week-volume">—</strong><span>volume no período</span></div>
+            <div class="chart-wrap">
+              <div class="chart-y-labels" aria-hidden="true"><span id="chart-max">—</span><span id="chart-mid">—</span><span>R$ 0</span></div>
+              <svg class="activity-chart" id="activity-chart" viewBox="0 0 700 220" role="img" aria-label="Gráfico de volume das transações nos últimos sete dias"></svg>
+            </div>
+            <div class="chart-x-labels" id="chart-labels" aria-hidden="true"></div>
+          </article>
+
+          <article class="panel distribution-panel">
+            <div class="panel-heading">
+              <div><h2>Status das transações</h2><p>Distribuição por resultado</p></div>
+              <button class="icon-button" id="distribution-info" type="button" aria-label="Informações sobre a distribuição">i</button>
+            </div>
+            <div class="distribution-content">
+              <div class="status-ring" id="status-ring">
+                <div class="ring-center"><strong id="ring-total">0</strong><span>transações</span></div>
+              </div>
+              <div class="status-legend">
+                <div class="legend-item"><span class="legend-color approved-color"></span><span>Aprovadas</span><strong id="approved-count">0</strong></div>
+                <div class="legend-item"><span class="legend-color rejected-color"></span><span>Recusadas</span><strong id="rejected-count">0</strong></div>
+                <div class="legend-item"><span class="legend-color pending-color"></span><span>Pendentes</span><strong id="legend-pending-count">0</strong></div>
+                <div class="legend-item"><span class="legend-color processing-color"></span><span>Em processamento</span><strong id="legend-processing-count">0</strong></div>
+              </div>
+            </div>
+            <div class="distribution-footnote"><span class="footnote-check">✓</span> Os dados refletem todas as transações carregadas</div>
+          </article>
+        </section>
+
+        <section class="panel transactions-panel" id="transactions">
+          <div class="transactions-heading">
+            <div class="panel-heading-copy">
+              <h2>Transações</h2>
+              <p>Consulte e acompanhe toda a movimentação da sua conta.</p>
+            </div>
+            <div class="table-tools">
+              <label class="search-field">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4"/></svg>
+                <input id="search-input" type="search" placeholder="Buscar conta ou ID" aria-label="Buscar por conta ou ID">
+              </label>
+              <label class="filter-field">
+                <span class="sr-only">Filtrar por status</span>
+                <select id="status-filter">
+                  <option value="all">Todos os status</option>
+                  <option value="APPROVED">Aprovadas</option>
+                  <option value="REJECTED">Recusadas</option>
+                  <option value="PENDING">Pendentes</option>
+                  <option value="PROCESSING">Em processamento</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="table-meta"><span id="table-count">Carregando transações…</span><span class="secure-label"><i></i> Dados seguros</span></div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>TRANSAÇÃO</th><th>CONTA</th><th>DATA</th><th>VALOR</th><th>STATUS</th></tr></thead>
+              <tbody id="transaction-rows">
+                <tr><td class="table-loading" colspan="5"><span class="spinner"></span> Buscando transações…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="pagination-label">—</span>
+            <div class="pagination-actions">
+              <button class="page-button" id="previous-page" type="button" aria-label="Página anterior" disabled>‹</button>
+              <span id="page-number">1 / 1</span>
+              <button class="page-button" id="next-page" type="button" aria-label="Próxima página" disabled>›</button>
+            </div>
+          </div>
+        </section>
+        <footer class="page-footer"><span>PayPulse <span>·</span> Plataforma de pagamentos</span><span>Visão atualizada em <strong id="last-updated">—</strong></span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="transaction-dialog" id="transaction-dialog" aria-labelledby="dialog-title">
+    <form id="transaction-form">
+      <div class="dialog-heading">
+        <div class="dialog-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v13H3zM3 7l2-3h14l2 3"/><path d="M7 12h4"/></svg></div>
+        <button class="dialog-close" id="close-dialog" type="button" aria-label="Fechar">×</button>
+        <p class="eyebrow">NOVO PAGAMENTO</p>
+        <h2 id="dialog-title">Criar transação</h2>
+        <p>Informe os dados para processar um novo pagamento.</p>
+      </div>
+      <label class="form-label" for="account-input">Identificação da conta</label>
+      <input class="form-input" id="account-input" name="accountId" type="text" placeholder="Ex.: ACC-2048" maxlength="100" required>
+      <label class="form-label" for="amount-input">Valor da transação</label>
+      <div class="amount-input-wrap"><span>R$</span><input class="form-input" id="amount-input" name="amount" type="number" placeholder="0,00" min="0.01" max="99999999999999999" step="0.01" required></div>
+      <p class="form-hint">O pagamento será analisado pelo motor de liquidação.</p>
+      <div class="dialog-actions">
+        <button class="button button-secondary" id="cancel-dialog" type="button">Cancelar</button>
+        <button class="button button-primary" id="submit-transaction" type="submit">Processar pagamento</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
